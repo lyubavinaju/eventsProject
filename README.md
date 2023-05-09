@@ -10,5 +10,10 @@ API:<br>
 параметры: date, name - дата и название события <br>
 пример: http://localhost:8080/event/stats?date=2023-05-09&name=event1 <br>
 <p>Также реализовано несколько простых тестов. </p>
-Для работы приложения требуется postgresql, поменять application.properties, и выполнить команду create extension pgcrypto;
+Для работы приложения требуется: 
+<ul>
+<li> <a href="https://www.postgresql.org">PostgreSQL</a> </li>
+<li>Изменить в application.properties следующие свойства: spring.datasource.url, spring.datasource.username, spring.datasource.password</li>
+<li>Выполнить в PostgreSQL команду create extension pgcrypto;</li>
+</ul>
 
