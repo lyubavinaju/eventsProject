@@ -13,8 +13,8 @@ API:<br>
 <p>Также реализовано несколько простых тестов. </p>
 Для работы приложения требуется: 
 <ul>
-<li> <a href="https://www.postgresql.org">PostgreSQL версии 15.2 </a> </li>
+<li> <a href="https://www.postgresql.org">PostgreSQL (тестировалось на версии 15.2) </a> </li>
 <li>Изменить в application.properties следующие свойства: spring.datasource.url - адрес базы данных, spring.datasource.username - имя пользователя, spring.datasource.password - пароль</li>
-<li>Выполнить в PostgreSQL команду create extension pgcrypto; для возможности хранения паролей в базе данных</li>
+<li>Выполнить в PostgreSQL команду create extension pgcrypto; для хеширования паролей в базе данных</li>
 </ul>
 
