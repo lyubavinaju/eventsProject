@@ -27,12 +27,21 @@ public class EventController {
         this.personRepository = personRepository;
     }
 
+    /**
+     * Save event in database
+     *
+     * @param name     Event name
+     * @param username Username for authorization(optional)
+     * @param password      Password for authorization(optional)
+     * @param request  Request
+     * @return String with feedback
+     */
     @PostMapping("event/save")
     public String save(@RequestParam String name, @RequestParam(required = false) String username,
-                       @RequestParam(required = false) String pwd, HttpServletRequest request) {
+                       @RequestParam(required = false) String password, HttpServletRequest request) {
         try {
-            Person person = new Person(username, pwd);
-            boolean auth = username != null && pwd != null && personRepository.findByCredentials(person) != null;
+            Person person = new Person(username, password);
+            boolean auth = username != null && password != null && personRepository.findByCredentials(person) != null;
             Event event = new Event(name, LocalDate.now(), request.getRemoteAddr(), auth);
             eventRepository.save(event);
             return "Event saved";
@@ -42,6 +51,13 @@ public class EventController {
         }
     }
 
+    /**
+     * Calculate 3 events statistics: count of event filtered by date and name grouped by name, by ip, by user status
+     *
+     * @param date Event date to filter by
+     * @param name Event name to filter by
+     * @return List of 3 statistics converted to json string
+     */
     @GetMapping("event/stats")
     public String getStatistics(@RequestParam LocalDate date, @RequestParam String name) {
         return List.of(eventRepository.countByName(date, name).stream().map(Counter::toJsonString).toList(),

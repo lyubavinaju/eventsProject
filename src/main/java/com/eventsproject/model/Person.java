@@ -17,13 +17,19 @@ public class Person {
     @Size(min = 1, max = 50)
     @Column(unique = true, nullable = false)
     private String username;
+    /**
+     * Hash calculated from raw password, stored in database
+     */
     @Column
-    private String pwdHash;
+    private String passwordHash;
+    /**
+     * Raw password doesn't store in database
+     */
     @Transient
-    private String pwd;
+    private String password;
 
-    public Person(String username, String pwd) {
+    public Person(String username, String password) {
         this.username = username;
-        this.pwd = pwd;
+        this.password = password;
     }
 }

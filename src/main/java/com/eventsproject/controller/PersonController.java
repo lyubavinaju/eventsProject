@@ -17,10 +17,17 @@ public class PersonController {
         this.personRepository = personRepository;
     }
 
+    /**
+     * Register new user
+     *
+     * @param username Username
+     * @param password      Password
+     * @return String with feedback
+     */
     @PostMapping("user/register")
-    public String register(@RequestParam String username, @RequestParam String pwd) {
+    public String register(@RequestParam String username, @RequestParam String password) {
         try {
-            Person person = new Person(username, pwd);
+            Person person = new Person(username, password);
             personRepository.insertWithQuery(person);
             return "User saved";
         } catch (Exception e) {
@@ -28,5 +35,4 @@ public class PersonController {
             return "Something wrong: " + e.getMessage();
         }
     }
-
 }
